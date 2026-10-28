@@ -35,3 +35,11 @@ the controls' top three. 3 of 8 passed; by eye 4 looked good (Miles Davis to Wu-
 A Tribe Called Quest, Public Enemy, Madvillain; Taylor Swift to Slipknot: Avenged
 Sevenfold, Bullet for My Valentine, Metallica), 2 questionable, 2 unremarkable. Works
 best when the user's genre has a natural bridge into a varied client neighbourhood.
+
+**First interface (2026-10-28).** Local web app: enter 1-5 interests for the client and for
+you (typed), choose the kind to find doorways in, optionally a city. Shows up to three
+doorways (with the Qloo tags, which of your/their seeds Qloo ties them to, and a templated
+opener, not LLM-written), three poor places to start, and Qloo places for the city. Places
+are cultural matches, not a restaurant search: the Chicago test returned landmarks and a
+federal building alongside venues. Interests are matched to the top Qloo search hit, shown
+back to the user to confirm. Run with `npm run dev` (web 5195, API 3195).

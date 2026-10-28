@@ -1,6 +1,6 @@
 {
   "project": "doorway",
-  "entrypoints": ["scripts/pair-test.ts"],
+  "entrypoints": ["src/main.tsx", "server/index.ts", "scripts/pair-test.ts"],
   "files": [
     {
       "path": "server/qloo.ts",
@@ -21,6 +21,31 @@
       "path": "scripts/with-qloo-key.mjs",
       "role": "Fetches the shared Qloo key from Doppler into a child process",
       "depends_on": []
+    },
+    {
+      "path": "shared/brief.ts",
+      "role": "Request validation and brief view types",
+      "depends_on": []
+    },
+    {
+      "path": "server/brief.ts",
+      "role": "Brief orchestration: resolve, neighbourhood, re-rank, controls, places",
+      "depends_on": ["server/qloo.ts", "server/doorway.ts", "shared/brief.ts"]
+    },
+    {
+      "path": "server/app.ts",
+      "role": "Fastify API",
+      "depends_on": ["server/brief.ts"]
+    },
+    {
+      "path": "src/App.tsx",
+      "role": "Single-page interface",
+      "depends_on": ["src/api.ts", "shared/brief.ts"]
+    },
+    {
+      "path": "src/api.ts",
+      "role": "API client",
+      "depends_on": ["shared/brief.ts"]
     }
   ]
 }

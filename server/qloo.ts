@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const QLOO_ORIGIN = 'https://hackathon.api.qloo.com';
 export type Kind = 'artist' | 'brand' | 'movie' | 'tv_show' | 'book' | 'podcast' | 'place';
-export type Entity = { entityId: string; name: string; kind: Kind };
+export type Entity = { entityId: string; name: string; kind: Kind; tags?: string[] };
 export type Ranked = { entity: Entity; rank: number; contributingSeedIds: string[] };
 export interface Qloo {
   search(query: string, kind: Kind): Promise<Entity[]>;
@@ -11,6 +11,7 @@ export interface Qloo {
     seedIds: string[],
     take?: number,
     candidateIds?: string[],
+    location?: string,
   ): Promise<Ranked[]>;
 }
 
@@ -28,7 +29,16 @@ export function parseEntity(raw: unknown, kind: Kind): Entity | null {
     ![...array(r.types), r.subtype].includes(`urn:entity:${kind}`)
   )
     return null;
-  return { entityId: String(r.entity_id).toUpperCase(), name: text(r.name), kind };
+  const tags = array(r.tags)
+    .map((t) => text(record(t).name, 40))
+    .filter(Boolean)
+    .slice(0, 5);
+  return {
+    entityId: String(r.entity_id).toUpperCase(),
+    name: text(r.name),
+    kind,
+    ...(tags.length ? { tags } : {}),
+  };
 }
 
 /** Minimal read-only client: one origin, no redirects, bounded time and bytes, no retries. */
@@ -76,7 +86,7 @@ export function createQloo(
         .map((r) => parseEntity(r, kind))
         .filter((e): e is Entity => e !== null);
     },
-    async insights(kind, seedIds, take = 20, candidateIds) {
+    async insights(kind, seedIds, take = 20, candidateIds, location) {
       const upper = (ids: string[], max: number) =>
         [
           ...new Set(
@@ -97,6 +107,7 @@ export function createQloo(
         ...(candidates
           ? { 'filter.results.entities': candidates.join(',') }
           : { 'filter.exclude.entities': seeds.join(',') }),
+        ...(location?.trim() ? { 'filter.location.query': location.trim().slice(0, 80) } : {}),
         'feature.explainability': 'true',
         take: String(candidates?.length ?? take),
       });
