@@ -1,0 +1,26 @@
+{
+  "project": "doorway",
+  "entrypoints": ["scripts/pair-test.ts"],
+  "files": [
+    {
+      "path": "server/qloo.ts",
+      "role": "Read-only Qloo client with candidate re-ranking",
+      "depends_on": []
+    },
+    {
+      "path": "server/doorway.ts",
+      "role": "Doorway selection with control comparison",
+      "depends_on": ["server/qloo.ts"]
+    },
+    {
+      "path": "scripts/pair-test.ts",
+      "role": "Opt-in live pair test",
+      "depends_on": ["server/qloo.ts", "server/doorway.ts"]
+    },
+    {
+      "path": "scripts/with-qloo-key.mjs",
+      "role": "Fetches the shared Qloo key from Doppler into a child process",
+      "depends_on": []
+    }
+  ]
+}

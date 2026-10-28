@@ -1,0 +1,210 @@
+{
+  "fetchedAt": "2026-10-28T04:15:12.166Z",
+  "requests": 48,
+  "pairs": [
+    {
+      "kind": "far",
+      "seller": "Metallica",
+      "client": "Radiohead",
+      "neighbourhoodSize": 24,
+      "reranked": 24,
+      "doorways": [
+        "Muse",
+        "The Smashing Pumpkins",
+        "John Frusciante"
+      ],
+      "avoid": [
+        "The Flaming Lips",
+        "Thom Yorke",
+        "Blonde Redhead"
+      ],
+      "specific": [
+        "Muse"
+      ],
+      "supported": false,
+      "controlsUsed": [
+        "Miles Davis",
+        "Taylor Swift"
+      ]
+    },
+    {
+      "kind": "far",
+      "seller": "Johnny Cash",
+      "client": "Kendrick Lamar",
+      "neighbourhoodSize": 24,
+      "reranked": 24,
+      "doorways": [
+        "Kanye West",
+        "Danny Brown",
+        "Run the Jewels"
+      ],
+      "avoid": [
+        "Isaiah Rashad",
+        "Pusha T",
+        "Big Sean"
+      ],
+      "specific": [
+        "Run the Jewels"
+      ],
+      "supported": false,
+      "controlsUsed": [
+        "Miles Davis",
+        "Taylor Swift"
+      ]
+    },
+    {
+      "kind": "far",
+      "seller": "Taylor Swift",
+      "client": "Slipknot",
+      "neighbourhoodSize": 24,
+      "reranked": 24,
+      "doorways": [
+        "Avenged Sevenfold",
+        "Bullet for My Valentine",
+        "Metallica"
+      ],
+      "avoid": [
+        "Drowning Pool",
+        "Soulfly",
+        "Static-X"
+      ],
+      "specific": [
+        "Avenged Sevenfold",
+        "Bullet for My Valentine",
+        "Metallica"
+      ],
+      "supported": true,
+      "controlsUsed": [
+        "Miles Davis"
+      ]
+    },
+    {
+      "kind": "far",
+      "seller": "Miles Davis",
+      "client": "Wu-Tang Clan",
+      "neighbourhoodSize": 24,
+      "reranked": 24,
+      "doorways": [
+        "A Tribe Called Quest",
+        "Public Enemy",
+        "Madvillain"
+      ],
+      "avoid": [
+        "2pac",
+        "Mobb Deep",
+        "dead prez"
+      ],
+      "specific": [
+        "A Tribe Called Quest",
+        "Public Enemy",
+        "Madvillain"
+      ],
+      "supported": true,
+      "controlsUsed": [
+        "Taylor Swift"
+      ]
+    },
+    {
+      "kind": "far",
+      "seller": "Willie Nelson",
+      "client": "Beyoncé",
+      "neighbourhoodSize": 24,
+      "reranked": 24,
+      "doorways": [
+        "Taylor Swift",
+        "Ariana Grande",
+        "Carly Rae Jepsen"
+      ],
+      "avoid": [
+        "Ciara",
+        "Jojo",
+        "Katy Perry"
+      ],
+      "specific": [
+        "Taylor Swift"
+      ],
+      "supported": false,
+      "controlsUsed": [
+        "Miles Davis",
+        "Taylor Swift"
+      ]
+    },
+    {
+      "kind": "far",
+      "seller": "Dolly Parton",
+      "client": "Bad Bunny",
+      "neighbourhoodSize": 24,
+      "reranked": 24,
+      "doorways": [
+        "Tokischa",
+        "Rosalía",
+        "Karol G"
+      ],
+      "avoid": [
+        "Feid",
+        "Rauw Alejandro",
+        "Danny Ocean"
+      ],
+      "specific": [
+        "Tokischa"
+      ],
+      "supported": false,
+      "controlsUsed": [
+        "Miles Davis",
+        "Taylor Swift"
+      ]
+    },
+    {
+      "kind": "similar",
+      "seller": "Radiohead",
+      "client": "Arcade Fire",
+      "neighbourhoodSize": 24,
+      "reranked": 23,
+      "doorways": [
+        "Beck",
+        "The Strokes",
+        "Interpol"
+      ],
+      "avoid": [
+        "Wolf Parade",
+        "Band of Horses",
+        "Cold War Kids"
+      ],
+      "specific": [
+        "Interpol"
+      ],
+      "supported": false,
+      "controlsUsed": [
+        "Miles Davis",
+        "Taylor Swift"
+      ]
+    },
+    {
+      "kind": "similar",
+      "seller": "Metallica",
+      "client": "Iron Maiden",
+      "neighbourhoodSize": 24,
+      "reranked": 23,
+      "doorways": [
+        "Megadeth",
+        "Pantera",
+        "Black Label Society"
+      ],
+      "avoid": [
+        "Helloween",
+        "Blind Guardian",
+        "W.A.S.P."
+      ],
+      "specific": [
+        "Megadeth",
+        "Pantera",
+        "Black Label Society"
+      ],
+      "supported": true,
+      "controlsUsed": [
+        "Miles Davis",
+        "Taylor Swift"
+      ]
+    }
+  ]
+}
