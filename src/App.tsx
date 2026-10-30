@@ -2,6 +2,7 @@ import { DoorOpen, MapPin, Plus, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SEED_KINDS, type Brief, type EntityView, type SeedKind } from '../shared/brief';
 import { fetchBrief, fetchStatus } from './api';
+import { AgentPanel } from './AgentPanel';
 
 type Row = { name: string; kind: SeedKind };
 const KIND_LABEL: Record<SeedKind, string> = {
@@ -99,7 +100,7 @@ function Tags({ tags }: { tags: string[] }) {
   return tags.length ? <p className="tags">{tags.join(' · ')}</p> : null;
 }
 
-function Results({ brief }: { brief: Brief }) {
+export function Results({ brief }: { brief: Brief }) {
   const names = (list: string[]) => list.join(', ');
   return (
     <div className="results">
@@ -136,7 +137,11 @@ function Results({ brief }: { brief: Brief }) {
           )}
           <blockquote>
             {d.opener}
-            <small>Template wording, not AI-written. Say only what you honestly would.</small>
+            <small>
+              {d.aiOpener
+                ? 'Written by Gemini from what Qloo returned. Say only what you honestly would.'
+                : 'Template wording, not AI-written. Say only what you honestly would.'}
+            </small>
           </blockquote>
         </article>
       ))}
@@ -234,6 +239,8 @@ export function App() {
           </p>
         )}
       </header>
+      <AgentPanel />
+      <h2 className="manual">Or enter interests yourself</h2>
       <section className="samples" aria-label="Examples">
         <span>Try:</span>
         {SAMPLES.map((s) => (

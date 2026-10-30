@@ -15,6 +15,7 @@ app. Ship with `~/code/dev-env/bin/qloo-ship doorway`.
   compared against unrelated control seeds (`server/doorway.ts`).
 - LLM text must be grounded in returned Qloo fields (tags, adjectives) and never
   invent a connection. The user should only be told to say what they would honestly say.
+- The agent in `server/agent.ts` chooses its steps. The rules it cannot break stay in server code.
 - Secrets stay server-side and out of source control, in Doppler project `qloo`.
 
 ## Docs

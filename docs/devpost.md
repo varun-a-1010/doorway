@@ -15,8 +15,9 @@ impressive is easy. We wanted a result that had to earn its place.
 
 ## What it does
 
-Enter a few interests for you and the person you are meeting. Doorway finds something in their taste
-neighbourhood that sits closest to yours, plus places, experiences and gifts suited to them.
+Describe the meeting in a sentence or two. An agent finds each person's tastes on Qloo, looks for
+something in their neighbourhood that sits closest to yours, judges whether the result is real, and
+tries another kind of thing if it is weak. If your note is missing what it needs, it asks.
 
 ## Why Qloo is essential
 
@@ -25,8 +26,14 @@ against unrelated control tastes. A language model cannot supply that comparison
 
 ## How we built it
 
-`/v2/insights` builds the neighbourhood, and `filter.results.entities` re-ranks exactly that list.
-Control seeds test whether a result is specific to you. TypeScript, Fastify and React.
+- **Agent:** a Gemini tool loop chooses each step. In a live run it tried TV shows, found the result
+  weak, switched to artists and chose those. The server enforces the rules: references must be in
+  the note, interests must come from a real search, and an opener must name a real doorway.
+- **Qloo:** `/v2/insights` builds the neighbourhood, and `filter.results.entities` re-ranks exactly
+  that list. Control seeds test whether a result is specific to you.
+- **Reliability:** Gemini 4 Argon reads the note, and Flash models carry routine turns and catch
+  rate limits.
+- **Stack:** TypeScript, Fastify and React.
 
 ## Limits
 

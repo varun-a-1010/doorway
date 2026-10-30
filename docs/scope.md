@@ -15,11 +15,11 @@ No claim of shared interests, rapport or business outcome.
 `/v2/insights`; re-rank exactly that list under the user's seeds with
 `filter.results.entities`; compare against unrelated control seeds.
 
-| Supplier        | Provides                                                                         |
-| --------------- | -------------------------------------------------------------------------------- |
-| Qloo            | Client neighbourhood, closeness ordering, tags and descriptive fields per entity |
-| LLM (not built) | The opener sentence and rationale, grounded in returned Qloo fields              |
-| User            | Both people's stated interests, city                                             |
+| Supplier     | Provides                                                                         |
+| ------------ | -------------------------------------------------------------------------------- |
+| Qloo         | Client neighbourhood, closeness ordering, tags and descriptive fields per entity |
+| Gemini agent | Reads the note, resolves tastes, judges briefs, writes grounded openers          |
+| User         | Both people's stated interests, city                                             |
 
 **Demonstrated.** `/search`; `/v2/insights` with `signal.interests.entities`;
 `filter.results.entities` re-ranking; `filter.location.query` returns places (Chicago,

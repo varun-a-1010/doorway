@@ -21,6 +21,8 @@ export type DoorwayView = EntityView & {
   nearClient: string[];
   nearYou: string[];
   opener: string;
+  /** True when Gemini wrote the opener from Qloo's returned fields, instead of the template. */
+  aiOpener?: boolean;
 };
 export type Brief = {
   matched: { client: string[]; you: string[] };
@@ -32,4 +34,21 @@ export type Brief = {
   controls: string[];
   places: EntityView[] | null;
   placesNote?: string;
+};
+
+export type AgentStep = {
+  id: number;
+  kind: 'read' | 'search' | 'confirm' | 'drop' | 'brief' | 'finish' | 'ask' | 'error';
+  title: string;
+  detail?: string;
+  source: string;
+};
+
+export type AgentResult = {
+  status: 'ready' | 'needs_input' | 'held';
+  question?: string;
+  summary: string;
+  brief?: Brief;
+  tried: { kind: SeedKind; supported: boolean; specific: number }[];
+  turns: number;
 };

@@ -231,3 +231,58 @@ footer {
   border-top: 1px solid var(--line);
   padding-top: 16px;
 }
+
+.agent textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid currentcolor;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  resize: vertical;
+}
+
+.agent-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.trace {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0 0 0 14px;
+  border-left: 2px solid currentcolor;
+  list-style: none;
+}
+
+.trace li {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.trace p {
+  margin: 2px 0 0;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.trace small {
+  flex: none;
+  opacity: 0.75;
+}
+
+.agent-note {
+  margin: 14px 0 0;
+}
+
+.manual {
+  margin: 28px 0 10px;
+  font-size: 1.05em;
+}
