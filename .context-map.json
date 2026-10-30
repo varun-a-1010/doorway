@@ -46,6 +46,21 @@
       "path": "src/api.ts",
       "role": "API client",
       "depends_on": ["shared/brief.ts"]
+    },
+    {
+      "path": "server/models.ts",
+      "role": "Model chain and fallback across rate limits",
+      "depends_on": []
+    },
+    {
+      "path": "server/agent.ts",
+      "role": "Gemini meeting agent with server-enforced rules",
+      "depends_on": ["server/models.ts", "server/brief.ts", "server/qloo.ts"]
+    },
+    {
+      "path": "src/AgentPanel.tsx",
+      "role": "Meeting note, live trace and agent result",
+      "depends_on": ["src/api.ts"]
     }
   ]
 }
