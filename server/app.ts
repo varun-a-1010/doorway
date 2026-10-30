@@ -1,13 +1,16 @@
 import Fastify from 'fastify';
+import rateLimit from '@fastify/rate-limit';
 import { existsSync } from 'node:fs';
 import { briefInputSchema } from '../shared/brief';
 import { BriefError, buildBrief } from './brief';
 import type { Qloo } from './qloo';
 
 export async function buildApp(qloo: Qloo | null, staticRoot?: string) {
-  const app = Fastify({ logger: false, bodyLimit: 8_192 });
+  const app = Fastify({ logger: false, bodyLimit: 8_192, trustProxy: '127.0.0.1' });
+  await app.register(rateLimit, { max: 120, timeWindow: '1 minute' });
   app.get('/api/status', async () => ({ qloo: qloo ? 'connected' : 'not-connected' }));
-  app.post('/api/brief', async (request, reply) => {
+  const briefLimit = { config: { rateLimit: { max: 12, timeWindow: '1 minute' } } };
+  app.post('/api/brief', briefLimit, async (request, reply) => {
     if (!qloo) return reply.code(503).send({ error: 'Qloo is not connected.' });
     const parsed = briefInputSchema.safeParse(request.body);
     if (!parsed.success)
