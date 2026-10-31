@@ -31,8 +31,8 @@ against unrelated control tastes. A language model cannot supply that comparison
   the note, interests must come from a real search, and an opener must name a real doorway.
 - **Qloo:** `/v2/insights` builds the neighbourhood, and `filter.results.entities` re-ranks exactly
   that list. Control seeds test whether a result is specific to you.
-- **Reliability:** Gemini 4 Argon reads the note, and Flash models carry routine turns and catch
-  rate limits.
+- **Reliability:** Gemini 4 Argon reads the note, and Flash models carry routine turns. A second
+  Vertex project and the model chain catch rate limits.
 - **Stack:** TypeScript, Fastify and React.
 
 ## Limits

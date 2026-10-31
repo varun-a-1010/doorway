@@ -45,6 +45,36 @@ const SAMPLES: { label: string; client: Row[]; you: Row[]; city: string; kind: S
     kind: 'movie',
   },
   {
+    label: 'Dinner with a food lover',
+    client: [
+      { name: 'The Bear', kind: 'tv_show' },
+      { name: 'Kitchen Confidential', kind: 'book' },
+    ],
+    you: [{ name: 'Ted Lasso', kind: 'tv_show' }],
+    city: 'Chicago',
+    kind: 'tv_show',
+  },
+  {
+    label: 'Coffee with a gamer',
+    client: [
+      { name: 'The Legend of Zelda', kind: 'tv_show' },
+      { name: 'The Last of Us', kind: 'tv_show' },
+    ],
+    you: [{ name: 'Studio Ghibli', kind: 'brand' }],
+    city: 'Seattle',
+    kind: 'podcast',
+  },
+  {
+    label: 'Pitch to a Formula 1 fan',
+    client: [
+      { name: 'Formula One', kind: 'brand' },
+      { name: 'Rush', kind: 'movie' },
+    ],
+    you: [{ name: 'Fleetwood Mac', kind: 'artist' }],
+    city: 'Miami',
+    kind: 'brand',
+  },
+  {
     label: 'Dinner with a Chelsea supporter',
     client: [
       { name: 'Chelsea F.C.', kind: 'brand' },

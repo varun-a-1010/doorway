@@ -3,8 +3,24 @@ import type { AgentResult, AgentStep } from '../shared/brief';
 import { runAgent } from './api';
 import { Results } from './App';
 
-const SAMPLE =
-  'Meeting Jordan on Thursday. He is a big Knicks fan, keeps quoting The Mandalorian and rewatches Boardwalk Empire. I mostly listen to Radiohead and just finished Severance.';
+const EXAMPLES = [
+  {
+    label: 'A Knicks fan',
+    note: 'Meeting Jordan on Thursday. He is a big Knicks fan, keeps quoting The Mandalorian and rewatches Boardwalk Empire. I mostly listen to Radiohead and just finished Severance.',
+  },
+  {
+    label: 'A food lover',
+    note: 'Dinner with Maya on Friday. They keep rewatching The Bear and loved Kitchen Confidential. I mostly watch Ted Lasso.',
+  },
+  {
+    label: 'A gamer',
+    note: 'Coffee with Sam tomorrow. They talk about The Last of Us constantly and love anything from Nintendo. I am into Studio Ghibli.',
+  },
+  {
+    label: 'A Formula 1 fan',
+    note: 'Pitching Alex next week. They never miss Formula One and loved the film Rush. I mostly listen to Fleetwood Mac.',
+  },
+];
 
 export function AgentPanel() {
   const [note, setNote] = useState('');
@@ -38,14 +54,26 @@ export function AgentPanel() {
         rows={3}
         maxLength={800}
         value={note}
-        placeholder={SAMPLE}
+        placeholder={EXAMPLES[0]!.note}
         aria-label="Notes about the meeting"
         onChange={(e) => setNote(e.target.value)}
       />
+      <div className="samples" role="group" aria-label="Example meetings">
+        <span>Try:</span>
+        {EXAMPLES.map((example) => (
+          <button
+            key={example.label}
+            type="button"
+            className="chip"
+            disabled={busy}
+            aria-pressed={note === example.note}
+            onClick={() => setNote(example.note)}
+          >
+            {example.label}
+          </button>
+        ))}
+      </div>
       <div className="agent-actions">
-        <button type="button" className="link" disabled={busy} onClick={() => setNote(SAMPLE)}>
-          Use the example
-        </button>
         <button
           type="button"
           className="primary"

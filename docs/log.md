@@ -2,6 +2,8 @@
 
 ## 2026-10-31
 
+- Added three meetings tested on Qloo, across food, games and racing, and made every agent example
+  a clickable chip. Candidates with odd results, such as a hip-hop fan to Rolex, were left out.
 - Added a second Vertex project. A failed call now tries the same model there before the chain
   moves to the next model. A forced test moved the agent between projects twice mid-run and it
   still finished its brief.
