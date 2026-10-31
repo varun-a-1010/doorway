@@ -13,24 +13,46 @@ const KIND_LABEL: Record<SeedKind, string> = {
   book: 'Book',
   podcast: 'Podcast',
 };
-const SAMPLES: { label: string; client: Row[]; you: Row[]; city: string }[] = [
+const SAMPLES: { label: string; client: Row[]; you: Row[]; city: string; kind: SeedKind }[] = [
   {
-    label: 'Metallica fan meets a Radiohead fan',
-    client: [{ name: 'Radiohead', kind: 'artist' }],
-    you: [{ name: 'Metallica', kind: 'artist' }],
-    city: 'Chicago',
+    label: 'Lunch with a comedy fan',
+    client: [
+      { name: 'Seinfeld', kind: 'tv_show' },
+      { name: 'Tears for Fears', kind: 'artist' },
+    ],
+    you: [{ name: 'The Office', kind: 'tv_show' }],
+    city: 'Los Angeles',
+    kind: 'tv_show',
   },
   {
-    label: 'Jazz fan meets a Wu-Tang fan',
-    client: [{ name: 'Wu-Tang Clan', kind: 'artist' }],
-    you: [{ name: 'Miles Davis', kind: 'artist' }],
+    label: 'Golf with a new client',
+    client: [
+      { name: 'PGA Tour', kind: 'brand' },
+      { name: 'Boardwalk Empire', kind: 'tv_show' },
+    ],
+    you: [{ name: 'Daft Punk', kind: 'artist' }],
     city: 'New York',
+    kind: 'movie',
   },
   {
-    label: 'Pop fan meets a Slipknot fan',
-    client: [{ name: 'Slipknot', kind: 'artist' }],
+    label: 'Drinks with a Knicks fan',
+    client: [
+      { name: 'New York Knicks', kind: 'brand' },
+      { name: 'The Mandalorian', kind: 'tv_show' },
+    ],
+    you: [{ name: 'Radiohead', kind: 'artist' }],
+    city: 'New York',
+    kind: 'movie',
+  },
+  {
+    label: 'Dinner with a Chelsea supporter',
+    client: [
+      { name: 'Chelsea F.C.', kind: 'brand' },
+      { name: 'Everything Everywhere All at Once', kind: 'movie' },
+    ],
     you: [{ name: 'Taylor Swift', kind: 'artist' }],
-    city: 'Austin',
+    city: 'London',
+    kind: 'movie',
   },
 ];
 
@@ -252,7 +274,7 @@ export function App() {
               setClient(s.client);
               setYou(s.you);
               setCity(s.city);
-              setResultKind('artist');
+              setResultKind(s.kind);
               setBrief(null);
             }}
           >

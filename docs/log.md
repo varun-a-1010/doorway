@@ -4,6 +4,8 @@
 
 - Added per-client rate limiting and trusted the local nginx proxy for hosting.
 - Deployed to Motif at doorway.slate-app.online and published the repository under MIT.
+- Replaced the music-only samples with everyday meetings across sports, TV and film, each with the
+  result kind that tested strongest. Added bounded retries for Qloo rate limits and server errors.
 - Added a Gemini meeting agent that reads a free-text note, resolves tastes on Qloo, judges each
   brief against its control check, retries other kinds and writes grounded openers. Rules the
   model cannot break are enforced by the server. Manual entry still works with no LLM.

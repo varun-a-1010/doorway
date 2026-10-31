@@ -41,7 +41,7 @@ export function parseEntity(raw: unknown, kind: Kind): Entity | null {
   };
 }
 
-/** Minimal read-only client: one origin, no redirects, bounded time and bytes, no retries. */
+/** Minimal read-only client: one origin, no redirects, bounded time, bytes and retries. */
 export function createQloo(
   options: { apiKey: string; fetch?: typeof fetch; timeoutMs?: number } = { apiKey: '' },
 ): Qloo {
@@ -50,11 +50,18 @@ export function createQloo(
   async function get(path: string, params: Record<string, string>) {
     const url = new URL(path, QLOO_ORIGIN);
     url.search = new URLSearchParams(params).toString();
-    const response = await (options.fetch ?? fetch)(url, {
-      headers: { 'X-Api-Key': key, Accept: 'application/json' },
-      redirect: 'error',
-      signal: AbortSignal.timeout(options.timeoutMs ?? 12_000),
-    });
+    const send = () =>
+      (options.fetch ?? fetch)(url, {
+        headers: { 'X-Api-Key': key, Accept: 'application/json' },
+        redirect: 'error',
+        signal: AbortSignal.timeout(options.timeoutMs ?? 12_000),
+      });
+    let response = await send();
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (response.status !== 429 && response.status < 500) break;
+      await new Promise((done) => setTimeout(done, 300 * 2 ** attempt + Math.random() * 200));
+      response = await send();
+    }
     if (response.status === 404 && path === '/search') return { results: [] };
     if (!response.ok) throw new Error(`Qloo ${path} returned HTTP ${response.status}`);
     const reader = response.body?.getReader();

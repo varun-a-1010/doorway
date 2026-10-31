@@ -4,7 +4,7 @@ import { runAgent } from './api';
 import { Results } from './App';
 
 const SAMPLE =
-  'Meeting Dana on Thursday. She is always talking about Bruce Springsteen, Yellowstone and The Bear. I mostly listen to Radiohead and just finished Severance.';
+  'Meeting Jordan on Thursday. He is a big Knicks fan, keeps quoting The Mandalorian and rewatches Boardwalk Empire. I mostly listen to Radiohead and just finished Severance.';
 
 export function AgentPanel() {
   const [note, setNote] = useState('');
