@@ -3,8 +3,6 @@ import {
   GoogleGenAI,
   type Content,
   type FunctionDeclaration,
-  type GenerateContentParameters,
-  type GenerateContentResponse,
   type Part,
 } from '@google/genai';
 import { z } from 'zod';
@@ -16,7 +14,15 @@ import {
   type SeedKind,
 } from '../shared/brief';
 import { BriefError, buildBrief } from './brief';
-import { MODEL_CHAINS, MODEL_NAMES, thinkingFor, withFallback } from './models';
+import {
+  MODEL_CHAINS,
+  MODEL_NAMES,
+  thinkingFor,
+  withBackup,
+  withFallback,
+  type Generate,
+  type VertexAccount,
+} from './models';
 import type { Entity, Qloo } from './qloo';
 
 export const LIMITS = { turns: 12, searches: 10, briefs: 3 };
@@ -149,16 +155,16 @@ export function createAgent(options: {
   project?: string;
   serviceAccount?: string;
   location?: string;
-  generate?: (request: GenerateContentParameters) => Promise<GenerateContentResponse>;
+  backup?: VertexAccount;
+  generate?: Generate;
   sleep?: (ms: number) => Promise<void>;
   qloo: Qloo;
 }) {
-  let client: GoogleGenAI | undefined;
-  if (!options.generate && options.project && options.serviceAccount) {
-    const raw = options.serviceAccount.trim();
-    client = new GoogleGenAI({
+  const connect = (project: string, serviceAccount: string): Generate => {
+    const raw = serviceAccount.trim();
+    const client = new GoogleGenAI({
       vertexai: true,
-      project: options.project,
+      project,
       location: options.location || 'global',
       googleAuthOptions: {
         credentials: JSON.parse(
@@ -166,10 +172,20 @@ export function createAgent(options: {
         ),
       },
     });
-  }
-  const generate =
-    options.generate ??
-    (client ? (r: GenerateContentParameters) => client!.models.generateContent(r) : undefined);
+    return (r) => client.models.generateContent(r);
+  };
+  const fromVertex = (): Generate | undefined => {
+    if (!options.project || !options.serviceAccount) return undefined;
+    const primary = connect(options.project, options.serviceAccount);
+    if (!options.backup?.project || !options.backup.serviceAccount) return primary;
+    try {
+      return withBackup(primary, connect(options.backup.project, options.backup.serviceAccount));
+    } catch {
+      console.warn('The backup Vertex credential could not be read, so it is not in use.');
+      return primary;
+    }
+  };
+  const generate = options.generate ?? fromVertex();
   const { qloo } = options;
 
   return {

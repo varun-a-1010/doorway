@@ -13,6 +13,10 @@ const app = await buildApp(
         project: process.env.VERTEX_LLM_PROJECT_ID,
         serviceAccount: process.env.VERTEX_LLM_SERVICE_ACCOUNT,
         location: process.env.VERTEX_LLM_REGION,
+        backup: {
+          project: process.env.VERTEX_LLM_BACKUP_PROJECT_ID,
+          serviceAccount: process.env.VERTEX_LLM_BACKUP_SERVICE_ACCOUNT,
+        },
         qloo,
       })
     : undefined,

@@ -2,6 +2,9 @@
 
 ## 2026-10-31
 
+- Added a second Vertex project. A failed call now tries the same model there before the chain
+  moves to the next model. A forced test moved the agent between projects twice mid-run and it
+  still finished its brief.
 - Added per-client rate limiting and trusted the local nginx proxy for hosting.
 - Deployed to Motif at doorway.slate-app.online and published the repository under MIT.
 - Replaced the music-only samples with everyday meetings across sports, TV and film, each with the
